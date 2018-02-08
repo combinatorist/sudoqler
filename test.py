@@ -165,9 +165,15 @@ class bq_tests(unittest.TestCase):
         )
 
     def test004_abstract_array(self):
+        abstract_array = sud.abstract_array(example_sudoku2d_int)
         np.testing.assert_equal(
-          sud.abstract_array(example_sudoku2d_int),
+          abstract_array,
           example_sudoku3d_bool
+        )
+
+        np.testing.assert_equal(
+          sud.to_int_array(abstract_array),
+          example_sudoku2d_int
         )
 
     def test005_box_sudoku(self):

@@ -53,6 +53,18 @@ def abstract_array(array, value_list = range(1, box_size + 1)):
     three_valued_array[three_valued_array == False] = None
     return three_valued_array
 
+def to_int_array(array):
+    """
+    reverses `abstract_array` function above
+    """
+    array = array.copy()
+    for index in range(len(array)):
+        value_array = array[index]
+        value_array[value_array != True] = 0
+        value_array[value_array == True] = index + 1
+
+    return sum(array)
+
 def box_sudoku(sudoku2d):
     """
     creates a view that indicates the boxes
