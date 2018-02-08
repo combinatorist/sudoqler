@@ -1,5 +1,4 @@
 import numpy as np
-from tribool import Tribool
 import warnings
 
 box_shape    = (3, 3)
@@ -50,7 +49,7 @@ def abstract_array(array, value_list = range(1, box_size + 1)):
     for i in value_list:
         array_list.append(array == i)
     boolean_array = np.stack(array_list)
-    three_valued_array = np.asarray(boolean_array, dtype=Tribool)
+    three_valued_array = np.asarray(boolean_array, dtype=object)
     three_valued_array[three_valued_array == False] = None
     return three_valued_array
 
