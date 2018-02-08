@@ -126,6 +126,17 @@ example_box_sudoku = ([[0, 0, 0, 0, 0, 5, 0, 4, 0],
                        [0, 9, 0, 0, 0, 0, 6, 8, 5],
                        [0, 1, 0, 5, 0, 0, 0, 0, 0]])
 
+example_partial_elimination = np.asarray(
+    [[ None, False,  None, False, False, False,  None, False,  None],
+     [ None, False, False,  None, False,  None, False, False, False],
+     [ None, False,  None,  None, False,  None,  None, False,  None],
+     [ None, False,  None,  None, False,  None, False, False,  None],
+     [False, False,  None,  None, False,  None,  None, False, False],
+     [False, False, False, False,  True, False, False, False, False],
+     [False, False, False, False, False, False, False,  True, False],
+     [False, False, False,  None, False,  None, False, False,  None],
+     [False,  True, False, False, False, False, False, False, False]]
+)
 
 class bq_tests(unittest.TestCase):
     def test001_load(self):
@@ -165,6 +176,32 @@ class bq_tests(unittest.TestCase):
           example_box_sudoku
         )
 
+    def test005_rotate(self):
+        positional_3d_array = np.asarray(range(1, 9 ** 3 + 1)).reshape((9,) * 3)
+        result = sud.rotate(sud.rotate(sud.rotate(positional_3d_array)))
+        np.testing.assert_equal(
+            result,
+            positional_3d_array
+        )
+
+    def test006_group_ungroup(self):
+        # demonstrates logic used inside eliminate function
+        test_array = np.arange(27).reshape((3, 3, 3))
+        grouped = test_array.reshape((9, 3))
+        ungrouped = grouped.reshape((3, 3, 3))
+
+        np.testing.assert_equal(
+            ungrouped,
+            test_array
+        )
+
+    def test007_eliminate(self):
+        result = sud.eliminate(example_sudoku3d_bool)
+        np.testing.assert_equal(
+            result[0],
+            example_partial_elimination
+        )
+
     def test999_end_to_end(self):
         np.testing.assert_equal(
             sud.abstract_array(sud.array_to_int(
@@ -175,5 +212,4 @@ class bq_tests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-        pdb.set_trace()
         unittest.main()

@@ -63,5 +63,28 @@ def box_sudoku(sudoku2d):
     # Then, swaps middle 2 axes and converts to new (9, 9) [9 boxes by 9 cells]
     return np.swapaxes(unit_row_sudoku, -3, -2).reshape(puzzle_shape)
 
+def rotate(array):
+    """
+    rotates axes once by pushing first axis to the last position
+    """
+    return np.moveaxis(array, 0, -1)
+
+def eliminate(array):
+    """
+    marks unknowns false where they would conflict with known values
+    """
+    array = array.copy()
+    for axis in range(3):
+        groups = array.reshape((puzzle_size, box_size))
+        for group in groups:
+            occupied = max(group)
+            if occupied == True:
+                group[group != True] = False
+
+        array = groups.reshape((box_size,) * 3)
+        array = rotate(array)
+    return array
+
+
 if __name__ == '__main__':
   main()
