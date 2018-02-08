@@ -100,5 +100,23 @@ def deduce(array):
         array = rotate(array)
     return array
 
+def resolve(array):
+    """
+    attempts one round of progress on puzzle
+    """
+    return deduce(eliminate(array))
+
+def solve(array):
+    """
+    solves entire puzzle as far as possible
+    """
+    resolved = resolve(array.copy())
+    while np.any(np.not_equal(resolved, array)):
+        array = resolved.copy()
+        resolved = resolve(array.copy())
+
+    return resolved
+
+
 if __name__ == '__main__':
   main()
