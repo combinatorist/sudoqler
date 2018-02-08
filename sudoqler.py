@@ -1,4 +1,5 @@
 import numpy as np
+from tribool import Tribool
 import warnings
 
 box_shape    = (3, 3)
@@ -21,9 +22,9 @@ def from_one_line(one_line_sudoku):
     """
     length = len(one_line_sudoku)
     if length > puzzle_size:
-        warning_body = ["Too many values: Needed {}, but received {}", 
+        warning_body = ["Too many values: Needed {}, but received {}",
                         "Ignored values: {} ..."]
-        warnings.warn('\n'.join(warning_body).format(puzzle_size, length, 
+        warnings.warn('\n'.join(warning_body).format(puzzle_size, length,
             one_line_sudoku[puzzle_size:puzzle_size + 7]
             .encode('string_escape')))
     sudoku1d = np.array([char for char in one_line_sudoku[:puzzle_size]])
@@ -39,16 +40,19 @@ def array_to_int(array, find='.', replace=0):
     array[array == find] = replace
     int_array = np.asarray(array, dtype=int)
     return int_array
-    
 
-def abstract_array(array, value_list = range(box_size + 1)):
+
+def abstract_array(array, value_list = range(1, box_size + 1)):
     """
     creates boolean array with additional dimension representing values
     """
     array_list = []
     for i in value_list:
         array_list.append(array == i)
-    return np.stack(array_list)
+    boolean_array = np.stack(array_list)
+    three_valued_array = np.asarray(boolean_array, dtype=Tribool)
+    three_valued_array[three_valued_array == False] = None
+    return three_valued_array
 
 def box_sudoku(sudoku2d):
     """
@@ -61,4 +65,3 @@ def box_sudoku(sudoku2d):
 
 if __name__ == '__main__':
   main()
-    

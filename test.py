@@ -14,7 +14,7 @@ example_sudoku2d = np.asarray([['.', '.', '.', '8', '4', '7', '.', '5', '.'],
                                ['.', '5', '.', '.', '9', '.', '.', '1', '.'],
                                ['8', '.', '4', '.', '.', '.', '5', '.', '.'],
                                ['.', '1', '.', '6', '8', '5', '.', '.', '.']])
-                               
+
 example_sudoku2d_int = np.asarray([[0, 0, 0, 8, 4, 7, 0, 5, 0],
                                    [0, 0, 5, 0, 0, 0, 2, 0, 7],
                                    [0, 4, 0, 0, 6, 0, 0, 3, 0],
@@ -25,105 +25,96 @@ example_sudoku2d_int = np.asarray([[0, 0, 0, 8, 4, 7, 0, 5, 0],
                                    [8, 0, 4, 0, 0, 0, 5, 0, 0],
                                    [0, 1, 0, 6, 8, 5, 0, 0, 0]])
 
-example_sudoku3d_bool = np.asarray([[[ True,  True,  True, False, False, False,  True, False,  True],
-                                     [ True,  True, False,  True,  True,  True, False,  True, False],
-                                     [ True, False,  True,  True, False,  True,  True, False,  True],
-                                     [ True,  True,  True,  True, False,  True, False,  True,  True],
-                                     [False,  True,  True,  True,  True,  True,  True,  True, False],
-                                     [ True,  True, False,  True, False,  True,  True,  True,  True],
-                                     [ True, False,  True,  True, False,  True,  True, False,  True],
-                                     [False,  True, False,  True,  True,  True, False,  True,  True],
-                                     [ True, False,  True, False, False, False,  True,  True,  True]],
- 
-                                    [[False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False,  True, False, False, False, False],
-                                     [False, False, False, False, False, False, False,  True, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False,  True, False, False, False, False, False, False, False]],
- 
-                                    [[False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False,  True, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False,  True],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False]],
- 
-                                    [[False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False,  True, False],
-                                     [False, False, False, False, False, False,  True, False, False],
-                                     [ True, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False]],
- 
-                                    [[False, False, False, False,  True, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False,  True, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False,  True, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False]],
- 
-                                    [[False, False, False, False, False, False, False,  True, False],
-                                     [False, False,  True, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False,  True, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False,  True, False, False],
-                                     [False, False, False, False, False,  True, False, False, False]],
- 
-                                    [[False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False,  True, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False,  True, False, False, False, False, False]],
- 
-                                    [[False, False, False, False, False,  True, False, False, False],
-                                     [False, False, False, False, False, False, False, False,  True],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False,  True, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False,  True, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False]],
- 
-                                    [[False, False, False,  True, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [ True, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False,  True, False, False, False, False]],
- 
-                                    [[False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False,  True, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False],
-                                     [False, False, False, False, False, False, False, False, False]]])
+example_sudoku3d_bool = np.asarray([
+    [[None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, True, None, None, None, None],
+     [None, None, None, None, None, None, None, True, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, True, None, None, None, None, None, None, None]],
+
+    [[None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, True, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, True],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None]],
+
+    [[None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, True, None],
+     [None, None, None, None, None, None, True, None, None],
+     [True, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None]],
+
+    [[None, None, None, None, True, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, True, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, True, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None]],
+
+    [[None, None, None, None, None, None, None, True, None],
+     [None, None, True, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, True, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, True, None, None],
+     [None, None, None, None, None, True, None, None, None]],
+
+    [[None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, True, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, True, None, None, None, None, None]],
+
+    [[None, None, None, None, None, True, None, None, None],
+     [None, None, None, None, None, None, None, None, True],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, True, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, True, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None]],
+
+    [[None, None, None, True, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [True, None, None, None, None, None, None, None, None],
+     [None, None, None, None, True, None, None, None, None]],
+
+    [[None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, True, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None],
+     [None, None, None, None, None, None, None, None, None]]])
 
 example_box_sudoku = ([[0, 0, 0, 0, 0, 5, 0, 4, 0],
                        [8, 4, 7, 0, 0, 0, 0, 6, 0],
@@ -154,26 +145,26 @@ class bq_tests(unittest.TestCase):
             sudoku2d,
             example_sudoku2d
         )
-    
+
     def test003_array_to_int(self):
         int_array = sud.array_to_int(example_sudoku2d)
         np.testing.assert_equal(
             int_array,
             example_sudoku2d_int
         )
-    
+
     def test004_abstract_array(self):
         np.testing.assert_equal(
           sud.abstract_array(example_sudoku2d_int),
           example_sudoku3d_bool
         )
-    
+
     def test005_box_sudoku(self):
         np.testing.assert_equal(
           sud.box_sudoku(example_sudoku2d_int),
           example_box_sudoku
         )
-        
+
     def test999_end_to_end(self):
         np.testing.assert_equal(
             sud.abstract_array(sud.array_to_int(
@@ -182,7 +173,7 @@ class bq_tests(unittest.TestCase):
             example_sudoku3d_bool
         )
 
-        
+
 if __name__ == '__main__':
         pdb.set_trace()
         unittest.main()
