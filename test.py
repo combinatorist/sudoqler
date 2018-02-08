@@ -202,6 +202,13 @@ class bq_tests(unittest.TestCase):
             example_partial_elimination
         )
 
+    def test008_deduce(self):
+        result = sud.deduce(sud.eliminate(example_sudoku3d_bool))
+        # previously unknown
+        self.assertFalse(example_sudoku3d_bool[2 - 1][8 - 1][5 - 1] == True)
+        # now known there's a 2 in the 8th row and 5th column
+        self.assertTrue(result[2 - 1][8 - 1][5 - 1])
+
     def test999_end_to_end(self):
         np.testing.assert_equal(
             sud.abstract_array(sud.array_to_int(

@@ -84,6 +84,21 @@ def eliminate(array):
         array = rotate(array)
     return array
 
+def deduce(array):
+    """
+    marks unknowns true where alternatives have been eliminated
+    """
+    array = array.copy()
+    for axis in range(3):
+        groups = array.reshape((puzzle_size, box_size))
+        for group in groups:
+            exhausted = len([x for x in group if x == False])
+            if exhausted == box_size - 1:
+                group[group != False] = True
+
+        array = groups.reshape((box_size,) * 3)
+        array = rotate(array)
+    return array
 
 if __name__ == '__main__':
   main()
