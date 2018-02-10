@@ -94,6 +94,17 @@ def eliminate(array):
 
         array = groups.reshape((box_size,) * 3)
         array = rotate(array)
+
+    layers = []
+    for layer in array:
+        groups = box_sudoku(layer)
+        for group in groups:
+            occupied = max(group)
+            if occupied == True:
+                group[group != True] = False
+
+        layers.append(box_sudoku(groups))
+    array = np.stack(layers)
     return array
 
 def deduce(array):
@@ -110,6 +121,17 @@ def deduce(array):
 
         array = groups.reshape((box_size,) * 3)
         array = rotate(array)
+
+    layers = []
+    for layer in array:
+        groups = box_sudoku(layer)
+        for group in groups:
+            exhausted = len([x for x in group if x == False])
+            if exhausted == box_size - 1:
+                group[group != False] = True
+
+        layers.append(box_sudoku(groups))
+    array = np.stack(layers)
     return array
 
 def resolve(array):

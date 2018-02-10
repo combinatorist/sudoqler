@@ -138,6 +138,18 @@ example_partial_elimination = np.asarray(
      [False,  True, False, False, False, False, False, False, False]]
 )
 
+example_solution = np.asarray(
+    [[1, 3, 2, 8, 4, 7, 9, 5, 6],
+     [6, 8, 5, 1, 3, 9, 2, 4, 7],
+     [7, 4, 9, 5, 6, 2, 1, 3, 8],
+     [5, 2, 8, 4, 7, 6, 3, 9, 1],
+     [3, 6, 1, 9, 5, 8, 4, 7, 2],
+     [4, 9, 7, 2, 1, 3, 6, 8, 5],
+     [2, 5, 6, 7, 9, 4, 8, 1, 3],
+     [8, 7, 4, 3, 2, 1, 5, 6, 9],
+     [9, 1, 3, 6, 8, 5, 7, 2, 4]]
+)
+
 class bq_tests(unittest.TestCase):
     def test001_load(self):
         content = sud.load('test001_load.txt')
@@ -203,10 +215,8 @@ class bq_tests(unittest.TestCase):
 
     def test007_eliminate(self):
         result = sud.eliminate(example_sudoku3d_bool)
-        np.testing.assert_equal(
-            result[0],
-            example_partial_elimination
-        )
+        # None < False < True, so result as "conclusive" as answer or more
+        self.assertTrue(np.all(result[0] >= example_partial_elimination))
 
     def test008_deduce(self):
         result = sud.deduce(sud.eliminate(example_sudoku3d_bool))
@@ -214,6 +224,12 @@ class bq_tests(unittest.TestCase):
         self.assertFalse(example_sudoku3d_bool[2 - 1][8 - 1][5 - 1] == True)
         # now known there's a 2 in the 8th row and 5th column
         self.assertTrue(result[2 - 1][8 - 1][5 - 1])
+
+    def test009_solve(self):
+        np.testing.assert_equal(
+            sud.to_int_array(sud.solve(example_sudoku3d_bool)),
+            example_solution
+        )
 
     def test999_end_to_end(self):
         np.testing.assert_equal(
