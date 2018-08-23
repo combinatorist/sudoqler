@@ -151,6 +151,22 @@ def solve(array):
 
     return resolved
 
+def progress(int_array):
+    """
+    calculates progress so far on sudoku
+    """
+    return float(np.count_nonzero(int_array)) / int_array.size
+
+def demo(int_array, name = 'your puzzle'):
+    """
+    prints sudoku before / after solution
+    """
+    status = progress(int_array)
+    print 'Attempting "{}" sudoku puzzle ({}%)'.format(name, status * 100)
+    print int_array
+    solution = to_int_array(solve(abstract_array(int_array)))
+    print 'Solution so far... ({}%)'.format(progress(solution) * 100)
+    print solution
 
 if __name__ == '__main__':
   main()

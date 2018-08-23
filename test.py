@@ -150,6 +150,19 @@ example_solution = np.asarray(
      [9, 1, 3, 6, 8, 5, 7, 2, 4]]
 )
 
+# http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html
+hardest_sudoku = np.asarray(
+    [[8, 0, 0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 3, 6, 0, 0, 0, 0, 0],
+     [0, 7, 0, 0, 9, 0, 2, 0, 0],
+     [0, 5, 0, 0, 0, 7, 0, 0, 0],
+     [0, 0, 0, 0, 4, 5, 7, 0, 0],
+     [0, 0, 0, 1, 0, 0, 0, 3, 0],
+     [0, 0, 1, 0, 0, 0, 0, 6, 8],
+     [0, 0, 8, 5, 0, 0, 0, 1, 0],
+     [0, 9, 0, 0, 0, 0, 4, 0, 0]]
+)
+
 class bq_tests(unittest.TestCase):
     def test001_load(self):
         content = sud.load('test001_load.txt')
@@ -241,4 +254,7 @@ class bq_tests(unittest.TestCase):
 
 
 if __name__ == '__main__':
+        puzzles = {'example': example_sudoku2d_int, 'hardest': hardest_sudoku}
+        for name, puzzle in sorted(puzzles.items()):
+            sud.demo(puzzle, name)
         unittest.main()
