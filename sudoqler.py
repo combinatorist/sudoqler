@@ -10,7 +10,7 @@ def load(file):
     """
     loads file
     """
-    with open(file) as f:
+    with open(file, 'r') as f:
         contents = f.read()
     return contents
 
@@ -21,11 +21,11 @@ def from_one_line(one_line_sudoku):
     """
     length = len(one_line_sudoku)
     if length > puzzle_size:
-        warning_body = ["Too many values: Needed {}, but received {}",
-                        "Ignored values: {} ..."]
-        warnings.warn('\n'.join(warning_body).format(puzzle_size, length,
-            one_line_sudoku[puzzle_size:puzzle_size + 7]
-            .encode('string_escape')))
+        ignored_values = one_line_sudoku[puzzle_size:].encode()
+        if ignored_values == '\n':
+            warning_body = ["Too many values: Needed {}, but received {}",
+                            "Ignored values: {} ..."]
+            warnings.warn('\n'.join(warning_body).format(puzzle_size, length, ignored_values))
     sudoku1d = np.array([char for char in one_line_sudoku[:puzzle_size]])
     sudoku2d = sudoku1d.copy().reshape(puzzle_shape)
     return sudoku2d
@@ -88,8 +88,10 @@ def eliminate(array):
     for axis in range(3):
         groups = array.reshape((puzzle_size, box_size))
         for group in groups:
-            occupied = max(group)
-            if occupied == True:
+            occupied = np.count_nonzero(group)
+            if occupied > 1:
+                warn('Impossible: conflicting values!')
+            elif occupied:
                 group[group != True] = False
 
         array = groups.reshape((box_size,) * 3)
@@ -99,8 +101,10 @@ def eliminate(array):
     for layer in array:
         groups = box_sudoku(layer)
         for group in groups:
-            occupied = max(group)
-            if occupied == True:
+            occupied = np.count_nonzero(group)
+            if occupied > 1:
+                warn('Impossible: conflicting values!')
+            elif occupied:
                 group[group != True] = False
 
         layers.append(box_sudoku(groups))
@@ -162,11 +166,18 @@ def demo(int_array, name = 'your puzzle'):
     prints sudoku before / after solution
     """
     status = progress(int_array)
-    print 'Attempting "{}" sudoku puzzle ({}%)'.format(name, status * 100)
-    print int_array
+    print('Attempting "{}" sudoku puzzle ({}%)'.format(name, status * 100))
+    print(int_array)
     solution = to_int_array(solve(abstract_array(int_array)))
-    print 'Solution so far... ({}%)'.format(progress(solution) * 100)
-    print solution
+    print('Solution so far... ({}%)'.format(progress(solution) * 100))
+    print(solution)
 
 if __name__ == '__main__':
-  main()
+  from sys import argv
+  step1 = load(argv[1])
+  print(step1)
+  step2 = from_one_line(step1)
+  print(step2)
+  step3=array_to_int(step2)
+  print(step3)
+  demo(step3, argv[1])

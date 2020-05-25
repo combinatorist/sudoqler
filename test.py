@@ -228,8 +228,12 @@ class bq_tests(unittest.TestCase):
 
     def test007_eliminate(self):
         result = sud.eliminate(example_sudoku3d_bool)
-        # None < False < True, so result as "conclusive" as answer or more
-        self.assertTrue(np.all(result[0] >= example_partial_elimination))
+        # checks that it eliminated some (None -> False)
+        self.assertTrue(np.any(
+            np.dstack([result[0], example_sudoku3d_bool[0]]) == [False, None]))
+        # actually checks that it eliminated some I missed in my manual attempt
+        self.assertTrue(np.any(
+            np.dstack([result[0], example_partial_elimination]) == [False, None]))
 
     def test008_deduce(self):
         result = sud.deduce(sud.eliminate(example_sudoku3d_bool))
