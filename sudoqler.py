@@ -88,8 +88,10 @@ def eliminate(array):
     for axis in range(3):
         groups = array.reshape((puzzle_size, box_size))
         for group in groups:
-            occupied = max(group)
-            if occupied == True:
+            occupied = np.count_nonzero(group)
+            if occupied > 1:
+                warn('Impossible: conflicting values!')
+            elif occupied:
                 group[group != True] = False
 
         array = groups.reshape((box_size,) * 3)
@@ -99,8 +101,10 @@ def eliminate(array):
     for layer in array:
         groups = box_sudoku(layer)
         for group in groups:
-            occupied = max(group)
-            if occupied == True:
+            occupied = np.count_nonzero(group)
+            if occupied > 1:
+                warn('Impossible: conflicting values!')
+            elif occupied:
                 group[group != True] = False
 
         layers.append(box_sudoku(groups))
