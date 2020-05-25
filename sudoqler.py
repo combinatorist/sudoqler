@@ -172,4 +172,11 @@ def demo(int_array, name = 'your puzzle'):
     print(solution)
 
 if __name__ == '__main__':
-  main()
+  from sys import argv
+  step1 = load(argv[1])
+  print(step1)
+  step2 = from_one_line(step1)
+  print(step2)
+  step3=array_to_int(step2)
+  print(step3)
+  demo(step3, argv[1])
