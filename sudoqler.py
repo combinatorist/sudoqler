@@ -22,7 +22,7 @@ def from_one_line(one_line_sudoku):
     length = len(one_line_sudoku)
     if length > puzzle_size:
         ignored_values = one_line_sudoku[puzzle_size:].encode()
-        if ignored_values == '\n':
+        if ignored_values != b'\n':
             warning_body = ["Too many values: Needed {}, but received {}",
                             "Ignored values: {} ..."]
             warnings.warn('\n'.join(warning_body).format(puzzle_size, length, ignored_values))
